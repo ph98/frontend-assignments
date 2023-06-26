@@ -1,8 +1,7 @@
-
-const TableComponent = () => {
+function TableComponent() {
   return (
     <div>TableComponent</div>
-  )
+  );
 }
 
-export default TableComponent
+export default TableComponent;

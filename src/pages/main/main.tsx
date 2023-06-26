@@ -2,13 +2,13 @@ import SearchBox from '../../components/search-box/searchBox';
 import TableComponent from '../../components/table/table';
 import './main.scss';
 
-const MainPage = () => {
+function MainPage() {
   return (
     <div className="mage-page">
-        <SearchBox />
-        <TableComponent />
+      <SearchBox placeholder="Please Search Here!" />
+      <TableComponent />
     </div>
-  )
+  );
 }
 
-export default MainPage
+export default MainPage;
