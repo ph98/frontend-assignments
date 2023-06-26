@@ -1,9 +1,9 @@
-import TableComponent from './components/table';
+import MainPage from "./pages/main/main";
 
 function App() {
   return (
     <div className="App">
-        <TableComponent />
+      <MainPage />
     </div>
   );
 }
