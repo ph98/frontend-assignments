@@ -1,12 +1,22 @@
+import { Input } from 'antd';
+
 type SearchBoxProps = {
   placeholder: string
 };
 
 function SearchBox({ placeholder = '' }: SearchBoxProps) {
+  const onSearch = (value: string) => {
+    console.log('e', value);
+  };
+  // const
   return (
     <div>
-      SearchBox
-      <input placeholder={placeholder} />
+      <Input.Search
+        placeholder={placeholder}
+        allowClear
+        onSearch={onSearch}
+        // style={{ width: 300 }}
+      />
     </div>
   );
 }

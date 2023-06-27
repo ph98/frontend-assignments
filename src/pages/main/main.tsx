@@ -1,3 +1,4 @@
+import { Col, Row } from 'antd';
 import SearchBox from '../../components/search-box/searchBox';
 import TableComponent from '../../components/table/table';
 import './main.scss';
@@ -5,8 +6,16 @@ import './main.scss';
 function MainPage() {
   return (
     <div className="mage-page">
-      <SearchBox placeholder="Please Search Here!" />
-      <TableComponent />
+      <Row justify="center">
+        <Col xs={12}>
+          <SearchBox placeholder="Please Search Here!" />
+        </Col>
+      </Row>
+      <Row justify="center">
+        <Col xs={23}>
+          <TableComponent />
+        </Col>
+      </Row>
     </div>
   );
 }
