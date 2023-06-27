@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Table, TableColumnProps, Tooltip } from 'antd';
+import { Table, Tooltip } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ColumnProps, ColumnsType } from 'antd/es/table';
+import { ColumnProps } from 'antd/es/table';
 import parseCsvData from '../../utils/parsCSV';
+import humanize from '../../utils/humanize';
 
 type DataItem = {
   age: string;
@@ -17,31 +18,107 @@ type DataItem = {
   netWorth: string;
 };
 
-const columns:ColumnsType<DataItem>[] = [
+const columns:ColumnProps<DataItem>[] = [
+  {
+    title: 'Customer name',
+    dataIndex: 'customerName',
+    key: 'customerName',
+    // TODO: fix this sorting
+    sorter: (a: DataItem, b: DataItem) => Number(a.customerName) - Number(b.customerName),
+  },
+  {
+    title: 'Customer e-mail',
+    dataIndex: 'customerEmail',
+    key: 'customerEmail', // TODO: fix this sorting
+    sorter: (a: DataItem, b: DataItem) => Number(a.customerEmail) - Number(b.customerEmail),
+  },
+  {
+    title: 'Country',
+    dataIndex: 'country',
+    key: 'country',
+    // TODO: fix this sorting
+    sorter: (a: DataItem, b: DataItem) => Number(a.country) - Number(b.country),
+  },
+  {
+    title: 'Gender',
+    dataIndex: 'gender',
+    key: 'gender',
+    render: (value: string) => (value === '0' ? 'Male' : 'Female'),
+    // TODO: fix this sorting
+    sorter: (a: DataItem, b: DataItem) => Number(a.gender) - Number(b.gender),
+
+  },
   {
     title: 'Age',
     dataIndex: 'age',
     key: 'age',
-    sorter: (a, b) => a.age - b.age,
+    sorter: (a: DataItem, b: DataItem) => Number(a.age) - Number(b.age),
     render(value, record, index) {
-      // TODO: maybe move to utils:
       const years = Math.floor(value);
       const months = Math.floor((value - years) * 12);
       return (
-        <Tooltip title={`${years} year${years > 1 ? 's' : ''} and ${months} month${months > 1 ? 's' : ''}`}>
+        <Tooltip title={`${years} year${years !== 1 ? 's' : ''} and ${months} month${months !== 1 ? 's' : ''}`}>
           {parseInt(value, 10)}
         </Tooltip>
       );
     },
   },
-  { title: 'Annual Salary', dataIndex: 'annual Salary', key: 'annual Salary' },
-  { title: 'Car purchase amount', dataIndex: 'car purchase amount ', key: 'car purchase amount ' },
-  { title: 'Country', dataIndex: 'country', key: 'country' },
-  { title: 'Credit card debt', dataIndex: 'credit card debt', key: 'credit card debt' },
-  { title: 'Customer e-mail', dataIndex: 'customer e-mail', key: 'customer e-mail' },
-  { title: 'Customer name', dataIndex: 'customer name', key: 'customer name' },
-  { title: 'Gender', dataIndex: 'gender', key: 'gender' },
-  { title: 'Net worth', dataIndex: 'net worth', key: 'net worth' },
+  {
+    title: 'Annual Salary',
+    dataIndex: 'annualSalary',
+    key: 'annualSalary',
+    sorter: (a: DataItem, b: DataItem) => Number(a.annualSalary) - Number(b.annualSalary),
+    render(value, record, index) {
+      return (
+        <Tooltip title={`$${value}`}>
+          $
+          {humanize({ number: value, fn: (n: number) => Number(n.toFixed(2)) })}
+        </Tooltip>
+      );
+    },
+  },
+  {
+    title: 'Credit card debt',
+    dataIndex: 'creditCardDebt',
+    key: 'creditCardDebt',
+    sorter: (a: DataItem, b: DataItem) => Number(a.creditCardDebt) - Number(b.creditCardDebt),
+    render(value, record, index) {
+      return (
+        <Tooltip title={`$${value}`}>
+          $
+          {humanize({ number: value, fn: (n: number) => Number(n.toFixed(2)) })}
+        </Tooltip>
+      );
+    },
+  },
+  {
+    title: 'Net worth',
+    dataIndex: 'netWorth',
+    key: 'netWorth',
+    sorter: (a: DataItem, b: DataItem) => Number(a.netWorth) - Number(b.netWorth),
+    render(value, record, index) {
+      return (
+        <Tooltip title={`$${value}`}>
+          $
+          {humanize({ number: value, fn: (n: number) => Number(n.toFixed(2)) })}
+        </Tooltip>
+      );
+    },
+  },
+
+  {
+    title: 'Car purchase amount',
+    dataIndex: 'carPurchaseAmount',
+    key: 'carPurchaseAmount',
+    sorter: (a: DataItem, b: DataItem) => Number(a.carPurchaseAmount) - Number(b.carPurchaseAmount),
+    render(value, record, index) {
+      return (
+        <Tooltip title={value ? `$${value}` : '-'}>
+          { value ? `$${humanize({ number: value, fn: (n: number) => Number(n.toFixed(2)) })}` : '-'}
+        </Tooltip>
+      );
+    },
+  },
 ];
 
 function TableComponent() {
@@ -49,24 +126,25 @@ function TableComponent() {
   useEffect(() => {
     axios.get('/data/Modelon_SkillTest_Data.csv').then(({ data }) => {
       const parsedData = parseCsvData(data);
-      const formattedData = parseCsvData.map(item=>({
-        age: 'age',
-        'annual Salary',
-        'car purchase amount '
-        'country',
-        'credit card debt',
-        'customer e-mail',
-        'customer name',
-        'gender',
-        'net worth',
-      }))
-      setCsvData();
+      const formattedData = parsedData.map((item, index) => ({
+        age: item.age,
+        annualSalary: item['annual Salary'],
+        carPurchaseAmount: item['car purchase amount\r'],
+        country: item.country,
+        creditCardDebt: item['credit card debt'],
+        customerEmail: item['customer e-mail'],
+        customerName: item['customer name'],
+        gender: item.gender,
+        netWorth: item['net worth'],
+        index,
+      }));
+      setCsvData(formattedData);
     });
   }, []);
 
   return (
     <div>
-      <Table dataSource={csvData} columns={columns} />
+      <Table dataSource={csvData} columns={columns} rowKey="index" />
     </div>
   );
 }
