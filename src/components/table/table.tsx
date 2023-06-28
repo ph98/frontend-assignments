@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useState } from 'react';
 import { Table, Tooltip } from 'antd';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 import { ColumnProps } from 'antd/es/table';
+import { useSelector } from 'react-redux';
 import parseCsvData from '../../utils/parsCSV';
 import humanize from '../../utils/humanize';
 
@@ -53,7 +53,7 @@ const columns:ColumnProps<DataItem>[] = [
     dataIndex: 'age',
     key: 'age',
     sorter: (a: DataItem, b: DataItem) => Number(a.age) - Number(b.age),
-    render(value, record, index) {
+    render(value) {
       const years = Math.floor(value);
       const months = Math.floor((value - years) * 12);
       return (
@@ -68,7 +68,7 @@ const columns:ColumnProps<DataItem>[] = [
     dataIndex: 'annualSalary',
     key: 'annualSalary',
     sorter: (a: DataItem, b: DataItem) => Number(a.annualSalary) - Number(b.annualSalary),
-    render(value, record, index) {
+    render(value) {
       return (
         <Tooltip title={`$${value}`}>
           $
@@ -82,7 +82,7 @@ const columns:ColumnProps<DataItem>[] = [
     dataIndex: 'creditCardDebt',
     key: 'creditCardDebt',
     sorter: (a: DataItem, b: DataItem) => Number(a.creditCardDebt) - Number(b.creditCardDebt),
-    render(value, record, index) {
+    render(value) {
       return (
         <Tooltip title={`$${value}`}>
           $
@@ -96,7 +96,7 @@ const columns:ColumnProps<DataItem>[] = [
     dataIndex: 'netWorth',
     key: 'netWorth',
     sorter: (a: DataItem, b: DataItem) => Number(a.netWorth) - Number(b.netWorth),
-    render(value, record, index) {
+    render(value) {
       return (
         <Tooltip title={`$${value}`}>
           $
@@ -111,7 +111,7 @@ const columns:ColumnProps<DataItem>[] = [
     dataIndex: 'carPurchaseAmount',
     key: 'carPurchaseAmount',
     sorter: (a: DataItem, b: DataItem) => Number(a.carPurchaseAmount) - Number(b.carPurchaseAmount),
-    render(value, record, index) {
+    render(value) {
       return (
         <Tooltip title={value ? `$${value}` : '-'}>
           { value ? `$${humanize({ number: value, fn: (n: number) => Number(n.toFixed(2)) })}` : '-'}
@@ -122,7 +122,12 @@ const columns:ColumnProps<DataItem>[] = [
 ];
 
 function TableComponent() {
-  const [csvData, setCsvData] = useState<any>([]);
+  const [csvData, setCsvData] = useState<DataItem[]>([]);
+  const searchText = useSelector((state: any) => state.search);
+
+  const searchedData = csvData
+    .filter(({ customerName }) => customerName.toLowerCase().includes(searchText.toLowerCase()));
+
   useEffect(() => {
     axios.get('/data/Modelon_SkillTest_Data.csv').then(({ data }) => {
       const parsedData = parseCsvData(data);
@@ -144,7 +149,7 @@ function TableComponent() {
 
   return (
     <div>
-      <Table dataSource={csvData} columns={columns} rowKey="index" />
+      <Table dataSource={searchedData} columns={columns} rowKey="index" />
     </div>
   );
 }

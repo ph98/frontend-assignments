@@ -1,21 +1,23 @@
 import { Input } from 'antd';
+import { useDispatch } from 'react-redux';
+import { setSearchText } from '../../store/slices/searchSlice';
 
 type SearchBoxProps = {
   placeholder: string
 };
 
 function SearchBox({ placeholder = '' }: SearchBoxProps) {
-  const onSearch = (value: string) => {
-    console.log('e', value);
+  const dispatch = useDispatch();
+
+  const onChange = (e: any) => {
+    dispatch(setSearchText(e.target.value));
   };
-  // const
+
   return (
     <div>
-      <Input.Search
+      <Input
         placeholder={placeholder}
-        allowClear
-        onSearch={onSearch}
-        // style={{ width: 300 }}
+        onChange={onChange}
       />
     </div>
   );
