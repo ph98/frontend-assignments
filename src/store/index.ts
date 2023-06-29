@@ -7,4 +7,8 @@ const store = configureStore({
   },
 });
 
+export type AppStore = {
+  search: ReturnType<typeof searchReducer>;
+};
+export type AppDispatch = typeof store.dispatch;
 export default store;

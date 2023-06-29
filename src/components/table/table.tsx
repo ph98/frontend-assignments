@@ -1,6 +1,6 @@
 import { Table, Tooltip } from 'antd';
 import { ColumnProps } from 'antd/es/table';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../store/hooks';
 import humanize from '../../utils/humanize';
 import { DataItem } from '../../types/dataItem';
 import useSkillTestData from '../../hooks/useSkillTestData';
@@ -106,7 +106,7 @@ const columns:ColumnProps<DataItem>[] = [
 
 function TableComponent() {
   const [skillTestData] = useSkillTestData();
-  const searchText = useSelector((state: any) => state.search);
+  const searchText = useAppSelector((state: any) => state.search);
 
   const searchedData = skillTestData
     .filter(({ customerName }) => customerName.toLowerCase().includes(searchText.toLowerCase()));

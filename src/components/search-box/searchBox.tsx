@@ -1,5 +1,5 @@
 import { Input } from 'antd';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../store/hooks';
 import { setSearchText } from '../../store/slices/searchSlice';
 
 type SearchBoxProps = {
@@ -7,7 +7,7 @@ type SearchBoxProps = {
 };
 
 function SearchBox({ placeholder = '' }: SearchBoxProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const onChange = (e: any) => {
     dispatch(setSearchText(e.target.value));
