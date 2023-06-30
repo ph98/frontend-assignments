@@ -14,7 +14,7 @@ function SearchBox({ placeholder = '' }: SearchBoxProps) {
   };
 
   return (
-    <div>
+    <div className="search-container">
       <Input
         placeholder={placeholder}
         onChange={onChange}
