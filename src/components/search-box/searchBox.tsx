@@ -18,6 +18,7 @@ function SearchBox({ placeholder = '' }: SearchBoxProps) {
       <Input
         placeholder={placeholder}
         onChange={onChange}
+        size="large"
       />
     </div>
   );

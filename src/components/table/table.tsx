@@ -113,7 +113,12 @@ function TableComponent() {
 
   return (
     <div className="table-container">
-      <Table dataSource={searchedData} columns={columns} rowKey="index" />
+      <Table
+        dataSource={searchedData}
+        columns={columns}
+        rowKey="index"
+        scroll={{ x: 1300 }}
+      />
     </div>
   );
 }
