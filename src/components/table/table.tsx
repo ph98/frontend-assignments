@@ -1,6 +1,5 @@
 import { Table, Tooltip } from 'antd';
 import Fuse from 'fuse.js';
-
 import { ColumnProps } from 'antd/es/table';
 import { useAppSelector } from '../../store/hooks';
 import humanize from '../../utils/humanize';

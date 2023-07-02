@@ -4,11 +4,6 @@ import { useEffect } from 'react';
 import CustomerForm from '../../components/customer-form/customerForm';
 import useSkillTestData from '../../hooks/useSkillTestData';
 
-// type AddCustomerProps = {
-//   isOpen: boolean;
-//   setIsOpen: (isOpen: boolean) => void;
-// };
-
 function EditCustomer() {
   const [form] = Form.useForm();
   const {

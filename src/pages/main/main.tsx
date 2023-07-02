@@ -7,8 +7,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import SearchBox from '../../components/search-box/searchBox';
 import TableComponent from '../../components/table/table';
 import AddCustomer from './addCustomer';
-import './main.scss';
 import EditCustomer from './editCustomer';
+import './main.scss';
 
 function MainPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -9,7 +9,7 @@ describe('table page should be rendered correctly', () => {
     mockMatchMedia();
   });
 
-  it('should have the right className', () => {
+  it('should have the right number of columns', () => {
     render(
       <Provider store={store}>
         <TableComponent />
@@ -18,7 +18,7 @@ describe('table page should be rendered correctly', () => {
 
     const headers = screen.getAllByRole('columnheader');
 
-    expect(headers).toHaveLength(9);
+    expect(headers).toHaveLength(10);
     expect(headers[0]).toHaveTextContent('Customer name');
     expect(headers[1]).toHaveTextContent('Customer e-mail');
     expect(headers[2]).toHaveTextContent('Country');
@@ -28,5 +28,6 @@ describe('table page should be rendered correctly', () => {
     expect(headers[6]).toHaveTextContent('Credit card debt');
     expect(headers[7]).toHaveTextContent('Net worth');
     expect(headers[8]).toHaveTextContent('Car purchase amount');
+    expect(headers[9]).toHaveTextContent(/actions/i);
   });
 });
