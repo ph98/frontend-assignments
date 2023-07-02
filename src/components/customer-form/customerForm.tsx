@@ -16,9 +16,11 @@ function CustomerForm({ onFinish, form }: CustomerFormProps) {
         onFinish={onFinish}
         onError={(e) => {
           console.log('e onError', e);
+          // TODO: handle Error
         }}
         onFinishFailed={(e) => {
           console.log('e onFinishFailed', e);
+          // TODO: handle Error
         }}
         validateTrigger="onBlur"
         form={form}
@@ -83,9 +85,9 @@ function CustomerForm({ onFinish, form }: CustomerFormProps) {
           <Select
             placeholder="Gender"
             options={[
-              { value: 'male', label: 'Male' },
-              { value: 'female', label: 'Female' },
-              { value: 'other', label: 'Other' },
+              { value: '0', label: 'Male' },
+              { value: '1', label: 'Female' },
+              { value: '2', label: 'Other' },
             ]}
           />
         </Form.Item>

@@ -8,9 +8,10 @@ import SearchBox from '../../components/search-box/searchBox';
 import TableComponent from '../../components/table/table';
 import AddCustomer from './addCustomer';
 import './main.scss';
+import EditCustomer from './editCustomer';
 
 function MainPage() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="mage-page">
@@ -36,6 +37,7 @@ function MainPage() {
       </Row>
 
       <AddCustomer isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+      <EditCustomer />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { Form, Modal } from 'antd';
 
-import CustomerForm from '../../components/custommer-form/custommerForm';
+import CustomerForm from '../../components/customer-form/customerForm';
 import useSkillTestData from '../../hooks/useSkillTestData';
 
 type AddCustomerProps = {
@@ -10,18 +10,16 @@ type AddCustomerProps = {
 
 function AddCustomer({ isOpen, setIsOpen }: AddCustomerProps) {
   const [form] = Form.useForm();
-  const { addCsv } = useSkillTestData();
+  const { addCustomer } = useSkillTestData();
   const addNewCustomer = () => {
     form.validateFields().then((values) => {
-      console.log('values', values);
-      addCsv(values);
+      addCustomer(values);
       setIsOpen(false);
     }).catch((err) => {
       console.log('err', err);
     });
-    // form.submit();
-    // setIsOpen(false);
   };
+
   return (
     <Modal
       title="Add Customer"

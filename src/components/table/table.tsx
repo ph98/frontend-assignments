@@ -6,6 +6,7 @@ import { useAppSelector } from '../../store/hooks';
 import humanize from '../../utils/humanize';
 import { DataItem } from '../../types/dataItem';
 import useSkillTestData from '../../hooks/useSkillTestData';
+import EditButton from './editButton';
 
 const columns:ColumnProps<DataItem>[] = [
   {
@@ -90,7 +91,6 @@ const columns:ColumnProps<DataItem>[] = [
       );
     },
   },
-
   {
     title: 'Car purchase amount',
     dataIndex: 'carPurchaseAmount',
@@ -101,6 +101,16 @@ const columns:ColumnProps<DataItem>[] = [
         <Tooltip title={value ? `$${value}` : '-'}>
           { value ? `$${humanize({ number: value, fn: (n: number) => Number(n.toFixed(2)) })}` : '-'}
         </Tooltip>
+      );
+    },
+  },
+  {
+    title: 'Actions',
+    dataIndex: 'customerEmail',
+    key: 'customerEmail',
+    render(value: string) {
+      return (
+        <EditButton email={value} />
       );
     },
   },

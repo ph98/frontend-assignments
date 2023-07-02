@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DataItem } from '../types/dataItem';
-import { setCustomers } from '../store/slices/customerSlice';
+import { setCustomers, setSelected, setStatus } from '../store/slices/customersSlice';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import parseCsvData from '../utils/parsCSV';
 
@@ -23,18 +23,26 @@ const fetchCSVData = () => axios.get('/data/Modelon_SkillTest_Data.csv').then(({
 
 const useSkillTestData = () => {
   const dispatch = useAppDispatch();
-  const customers: DataItem[] = useAppSelector((state: any) => state.customer);
+  const customers: DataItem[] = useAppSelector((state: any) => state.customers.data);
+  const selectedCustomer = useAppSelector((state: any) => state.customers.selectedCustomer);
+  const status = useAppSelector((state: any) => state.customers.status);
 
   useEffect(() => {
-    fetchCSVData()
-      .then((data) => dispatch(setCustomers(data)));
-  }, [dispatch]);
+    if (status === 'idle') {
+      dispatch(setStatus('loading'));
+      fetchCSVData()
+        .then((data) => {
+          dispatch(setCustomers(data));
+          dispatch(setStatus('done'));
+        });
+    }
+  }, []);
 
   const findByEmail = (customerEmail: string) => customers.find(
     (item) => item.customerEmail === customerEmail,
   );
 
-  const addCsv = (data: DataItem) => {
+  const addCustomer = (data: DataItem) => {
     if (findByEmail(data.customerEmail)) {
       throw new Error('Email already exists!');
     }
@@ -48,14 +56,16 @@ const useSkillTestData = () => {
     );
   };
 
-  const editItem = (data: DataItem) => {
-    setCustomers(
+  const editCustomer = (data: DataItem) => {
+    dispatch(setCustomers(
       customers.map((item) => (item.customerEmail === data.customerEmail ? data : item)),
-    );
+    ));
   };
 
+  const setSelectedCustomer = (email: string | null) => dispatch(setSelected(email));
+
   return {
-    customers, addCsv, editItem, findByEmail,
+    customers, selectedCustomer, addCustomer, editCustomer, findByEmail, setSelectedCustomer,
   };
 };
 
