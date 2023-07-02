@@ -36,3 +36,12 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+
+### some limitations and notes: 
+- I considered the csv file as our data and data structure, for example for age, it is better to store birthdays but as we don't have them I'll continue working with age.
+- As we don't have any backend, I did not stored any data in the cloud.
+- I've used Redux as it was mentioned in the document, but I would prefer to use `react-query` for something like this as it has more capabilities for data based applications.
+- I've used Ant design because I wanted to deliver best user experience in the limited timeline.
+- I considered USD is our currency.
+- I considered emails as a unique item in our data.

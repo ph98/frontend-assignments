@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DataItem } from '../types/dataItem';
+import { setCustomers } from '../store/slices/customerSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import parseCsvData from '../utils/parsCSV';
 
 const fetchCSVData = () => axios.get('/data/Modelon_SkillTest_Data.csv').then(({ data }) => {
   const parsedData = parseCsvData(data);
-  return parsedData.map((item, index) => ({
+  return parsedData.map((item: any) => ({
     age: item.age,
     annualSalary: item['annual Salary'],
     carPurchaseAmount: item['car purchase amount\r'],
@@ -15,18 +18,45 @@ const fetchCSVData = () => axios.get('/data/Modelon_SkillTest_Data.csv').then(({
     customerName: item['customer name'],
     gender: item.gender,
     netWorth: item['net worth'],
-    index, // we add unique index to use as keys
   }));
 });
 
 const useSkillTestData = () => {
-  const [csvData, setCsvData] = useState<DataItem[]>([]);
+  const dispatch = useAppDispatch();
+  const customers: DataItem[] = useAppSelector((state: any) => state.customer);
 
   useEffect(() => {
-    fetchCSVData().then(setCsvData);
-  }, []);
+    fetchCSVData()
+      .then((data) => dispatch(setCustomers(data)));
+  }, [dispatch]);
 
-  return [csvData];
+  const findByEmail = (customerEmail: string) => customers.find(
+    (item) => item.customerEmail === customerEmail,
+  );
+
+  const addCsv = (data: DataItem) => {
+    if (findByEmail(data.customerEmail)) {
+      throw new Error('Email already exists!');
+    }
+    dispatch(
+      setCustomers(
+        [
+          data,
+          ...customers,
+        ],
+      ),
+    );
+  };
+
+  const editItem = (data: DataItem) => {
+    setCustomers(
+      customers.map((item) => (item.customerEmail === data.customerEmail ? data : item)),
+    );
+  };
+
+  return {
+    customers, addCsv, editItem, findByEmail,
+  };
 };
 
 export default useSkillTestData;

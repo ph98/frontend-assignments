@@ -14,13 +14,11 @@ function SearchBox({ placeholder = '' }: SearchBoxProps) {
   };
 
   return (
-    <div className="search-container">
-      <Input
-        placeholder={placeholder}
-        onChange={onChange}
-        size="large"
-      />
-    </div>
+    <Input
+      placeholder={placeholder}
+      onChange={onChange}
+      size="large"
+    />
   );
 }
 

@@ -107,10 +107,10 @@ const columns:ColumnProps<DataItem>[] = [
 ];
 
 function TableComponent() {
-  const [skillTestData] = useSkillTestData();
+  const { customers } = useSkillTestData();
   const searchText = useAppSelector((state: any) => state.search);
 
-  const fuze = new Fuse(skillTestData, {
+  const fuze = new Fuse(customers, {
     keys: [
       {
         name: 'customerName',
@@ -118,11 +118,11 @@ function TableComponent() {
       },
       {
         name: 'customerEmail',
-        weight: 0.1,
+        weight: 0.3,
       },
       {
         name: 'country',
-        weight: 0.2,
+        weight: 0.5,
       },
     ],
     threshold: 0.3,
@@ -130,17 +130,15 @@ function TableComponent() {
 
   const result = searchText.length > 0
     ? fuze.search(searchText).map((item: any) => item.item)
-    : skillTestData;
+    : customers;
 
   return (
-    <div className="table-container">
-      <Table
-        dataSource={result}
-        columns={columns}
-        rowKey="index"
-        scroll={{ x: 1300 }}
-      />
-    </div>
+    <Table
+      dataSource={result}
+      columns={columns}
+      rowKey="customerEmail"
+      scroll={{ x: 1300 }}
+    />
   );
 }
 

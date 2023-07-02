@@ -14,7 +14,7 @@ describe('App', () => {
         <App />
       </Provider>,
     );
-    const searchInputElement = screen.getByPlaceholderText(/please search here/i);
+    const searchInputElement = screen.getByPlaceholderText(/search everything here!/i);
     expect(searchInputElement).toBeInTheDocument();
   });
 });
