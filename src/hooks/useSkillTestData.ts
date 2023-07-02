@@ -36,7 +36,8 @@ const useSkillTestData = () => {
           dispatch(setStatus('done'));
         });
     }
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status]);
 
   const findByEmail = (customerEmail: string) => customers.find(
     (item) => item.customerEmail === customerEmail,

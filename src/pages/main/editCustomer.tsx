@@ -35,9 +35,6 @@ function EditCustomer() {
     form.validateFields().then((values) => {
       editCustomer(values);
       setSelectedCustomer(null);
-    }).catch((err) => {
-      console.error('err', err);
-      // TODO: handle Error
     });
   };
 

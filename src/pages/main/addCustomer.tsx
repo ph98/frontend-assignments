@@ -15,8 +15,6 @@ function AddCustomer({ isOpen, setIsOpen }: AddCustomerProps) {
     form.validateFields().then((values) => {
       addCustomer(values);
       setIsOpen(false);
-    }).catch((err) => {
-      console.log('err', err);
     });
   };
 

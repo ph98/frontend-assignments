@@ -14,14 +14,6 @@ function CustomerForm({ onFinish, form }: CustomerFormProps) {
       <Form
         layout="vertical"
         onFinish={onFinish}
-        onError={(e) => {
-          console.log('e onError', e);
-          // TODO: handle Error
-        }}
-        onFinishFailed={(e) => {
-          console.log('e onFinishFailed', e);
-          // TODO: handle Error
-        }}
         validateTrigger="onBlur"
         form={form}
         autoComplete="off"
