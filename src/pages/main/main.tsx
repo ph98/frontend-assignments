@@ -8,7 +8,7 @@ function MainPage() {
     <div className="mage-page">
       <Row justify="center">
         <Col xs={12}>
-          <SearchBox placeholder="Search everything here!" />
+          <SearchBox placeholder="Search everything here! (Name, Email, Country)" />
         </Col>
       </Row>
       <Row justify="center">

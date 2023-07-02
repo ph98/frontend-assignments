@@ -1,4 +1,6 @@
 import { Table, Tooltip } from 'antd';
+import Fuse from 'fuse.js';
+
 import { ColumnProps } from 'antd/es/table';
 import { useAppSelector } from '../../store/hooks';
 import humanize from '../../utils/humanize';
@@ -108,13 +110,32 @@ function TableComponent() {
   const [skillTestData] = useSkillTestData();
   const searchText = useAppSelector((state: any) => state.search);
 
-  const searchedData = skillTestData
-    .filter(({ customerName }) => customerName.toLowerCase().includes(searchText.toLowerCase()));
+  const fuze = new Fuse(skillTestData, {
+    keys: [
+      {
+        name: 'customerName',
+        weight: 0.7,
+      },
+      {
+        name: 'customerEmail',
+        weight: 0.1,
+      },
+      {
+        name: 'country',
+        weight: 0.2,
+      },
+    ],
+    threshold: 0.3,
+  });
+
+  const result = searchText.length > 0
+    ? fuze.search(searchText).map((item: any) => item.item)
+    : skillTestData;
 
   return (
     <div className="table-container">
       <Table
-        dataSource={searchedData}
+        dataSource={result}
         columns={columns}
         rowKey="index"
         scroll={{ x: 1300 }}
