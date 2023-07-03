@@ -1,11 +1,4 @@
-# Todo:
-[] complete Readme
-[] write unit test
-[] write E2E test
-[] Work on the styling
-[] probably create a performance report
-[] replace the typing in the search
-  
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -37,6 +30,13 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npx cypress open`
+
+Run the Cypress for End to End testing.\
+You can see and edit the tests in `cypress/e2e` folder.\
+
+See the section about [cypress](https://docs.cypress.io/guides/getting-started/opening-the-app) for more information.
+
 
 ### some limitations and notes: 
 - I considered the csv file as our data and data structure, for example for age, it is better to store birthdays but as we don't have them I'll continue working with age.
@@ -45,3 +45,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 - I've used Ant design because I wanted to deliver best user experience in the limited timeline.
 - I considered USD is our currency.
 - I considered emails as a unique item in our data.
+- I didn't devote time having perfect tests.
