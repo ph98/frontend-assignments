@@ -290,3 +290,9 @@
     background-color: transparent;
   }
 }
+
+.movies {
+  display: grid;
+  gap: 4rem 2rem; 
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+}

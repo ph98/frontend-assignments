@@ -20,7 +20,7 @@ function Movie({ movie, viewTrailer, closeCard }) {
   };
 
   return (
-    <div className="wrapper col-3 col-sm-4 col-md-3 col-lg-3 col-xl-2">
+    <div className="wrapper">
       <div
         className="card"
         role="button"
