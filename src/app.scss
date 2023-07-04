@@ -1,10 +1,10 @@
 #root {
   height: 100%;
-  min-height: 850px;  
-  background: linear-gradient(0deg, #1CB5E0 20%, #050b45 100%) no-repeat;
+  min-height: 850px;
+  background: linear-gradient(0deg, #1cb5e0 20%, #050b45 100%) no-repeat;
 }
 
-:root, 
+:root,
 .App {
   text-align: center;
 
@@ -31,7 +31,7 @@
     -moz-transition: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
     -ms-transition: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
     -o-transition: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
-    transition: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;        
+    transition: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
     -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
     animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
 
@@ -40,5 +40,4 @@
       height: 60vw;
     }
   }
-  
 }
