@@ -1,8 +1,19 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from '../utils/axios';
 
-export const fetchMovies = createAsyncThunk('fetch-movies', async (apiUrl) => {
-  const response = await fetch(apiUrl);
-  return response.json();
+export const fetchMovies = createAsyncThunk('fetch-movies', async ({ page = 1, query = null }) => {
+  if (query) {
+    return axios.get('/search/movie/', {
+      params: {
+        page,
+      },
+    }).then(({ data }) => data);
+  }
+  return axios.get('/discover/movie/', {
+    params: {
+      page,
+    },
+  }).then(({ data }) => data);
 });
 
 const moviesSlice = createSlice({
@@ -10,12 +21,17 @@ const moviesSlice = createSlice({
   initialState: {
     movies: [],
     fetchStatus: '',
+    totalPages: 1,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchMovies.fulfilled, (state, action) => ({
       ...state,
-      movies: action.payload,
+      movies: [
+        ...state.movies.filter((item) => item.page !== action.payload.page),
+        action.payload,
+      ],
+      totalPages: action.payload.total_pages,
       fetchStatus: 'success',
     })).addCase(fetchMovies.pending, (state) => ({
       ...state,

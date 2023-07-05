@@ -12,13 +12,13 @@ function Movies({ viewTrailer, closeCard }) {
   return (
     <div data-testid="movies" className="movies" ref={scrollableContainerRef}>
       {
-      (!movies.results || !movies.results.length)
+      (!movies || !movies.length)
         ? (
           <div className="no-movie">
             <span className="text-center">there is no movie available right now!</span>
           </div>
         )
-        : movies.results.map((movie) => (
+        : movies.map(({ results }) => results).flat().map((movie) => (
           <Movie
             movie={movie}
             key={movie.id}

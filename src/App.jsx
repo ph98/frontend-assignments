@@ -1,60 +1,34 @@
-/* eslint-disable no-unused-vars */
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Routes, Route, createSearchParams, useSearchParams, useNavigate,
 } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 import 'reactjs-popup/dist/index.css';
 
-import { fetchMovies } from './data/moviesSlice';
-import {
-  ENDPOINT_SEARCH, ENDPOINT_DISCOVER, ENDPOINT, API_KEY,
-} from './constants';
+import { ENDPOINT, API_KEY } from './constants';
 import Header from './components/Header';
 import Movies from './components/Movies';
 import Starred from './components/Starred';
 import WatchLater from './components/WatchLater';
 import YouTubePlayer from './components/YoutubePlayer';
 import CustomModal from './components/CustomModal/custom-modal';
+import useInfiniteScroll from './hooks/useInfiniteScroll';
 
 import './app.scss';
 
 function App() {
-  const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('search');
   const [videoKey, setVideoKey] = useState();
-  const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
-
-  const closeModal = () => setOpen(false);
 
   const closeCard = () => {
 
   };
 
-  const getSearchResults = (query) => {
-    if (query !== '') {
-      dispatch(fetchMovies(`${ENDPOINT_SEARCH}&query=${query}`));
-      setSearchParams(createSearchParams({ search: query }));
-    } else {
-      dispatch(fetchMovies(ENDPOINT_DISCOVER));
-      setSearchParams();
-    }
-  };
-
   const searchMovies = (query) => {
     navigate('/');
-    getSearchResults(query);
-  };
-
-  const getMovies = () => {
-    if (searchQuery) {
-      dispatch(fetchMovies(`${ENDPOINT_SEARCH}&query=${searchQuery}`));
-    } else {
-      dispatch(fetchMovies(ENDPOINT_DISCOVER));
-    }
+    setSearchParams(createSearchParams({ search: query }));
   };
 
   const getMovie = async (id) => {
@@ -72,14 +46,9 @@ function App() {
 
   const viewTrailer = (movie) => {
     getMovie(movie.id);
-    if (!videoKey) setOpen(true);
-    setOpen(true);
   };
 
-  useEffect(() => {
-    getMovies();
-  }, []);
-
+  useInfiniteScroll(searchQuery);
   return (
     <div className="App">
       <Header
