@@ -5,13 +5,13 @@ import {
 
 import 'reactjs-popup/dist/index.css';
 
+import Popup from 'reactjs-popup';
 import { ENDPOINT, API_KEY } from './constants';
 import Header from './components/Header';
 import Movies from './components/Movies';
 import Starred from './components/Starred';
 import WatchLater from './components/WatchLater';
 import YouTubePlayer from './components/YoutubePlayer';
-import CustomModal from './components/CustomModal/custom-modal';
 import useInfiniteScroll from './hooks/useInfiniteScroll';
 
 import './app.scss';
@@ -59,19 +59,19 @@ function App() {
         setSearchParams={setSearchParams}
       />
       <div className="container">
-        {
-          videoKey
-            ? (
-              <CustomModal
-                isOpen={videoKey !== null}
-                onClose={() => setVideoKey(null)}
-              >
-                <YouTubePlayer
-                  videoKey={videoKey}
-                />
-              </CustomModal>
-            ) : null
-        }
+        <Popup
+          open={Boolean(videoKey)}
+          closeOnDocumentClick
+          onClose={() => setVideoKey(null)}
+          closeOnEscape
+        >
+          <YouTubePlayer
+            videoKey={videoKey}
+          />
+          <button className="btn btn-primary close-button" onClick={() => setVideoKey(null)} type="button">
+            Close
+          </button>
+        </Popup>
         <Routes>
           <Route path="/" element={<Movies viewTrailer={viewTrailer} closeCard={closeCard} />} />
           <Route path="/starred" element={<Starred viewTrailer={viewTrailer} />} />
