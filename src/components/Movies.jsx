@@ -5,7 +5,7 @@ import '../styles/movies.scss';
 
 function Movies({ viewTrailer, closeCard }) {
   const scrollableContainerRef = useRef();
-  const { movies } = useSelector((prevState) => prevState.movies);
+  const { movies, fetchStatus } = useSelector((prevState) => prevState.movies);
 
   // TODO: handle the search here
 
@@ -26,7 +26,12 @@ function Movies({ viewTrailer, closeCard }) {
             closeCard={closeCard}
           />
         ))
-}
+    }
+      {
+      fetchStatus === 'loading'
+        ? 'loading'
+        : null
+    }
     </div>
   );
 }
