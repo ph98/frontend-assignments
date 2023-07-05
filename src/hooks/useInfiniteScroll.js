@@ -49,6 +49,14 @@ const useInfiniteScroll = (searchQuery, debounceDelay = 300) => {
   useEffect(() => {
     getMovies(searchQuery);
   }, [page]);
+
+  useEffect(() => {
+    if (page !== 1) {
+      setPage(1);
+    } else {
+      getMovies(searchQuery);
+    }
+  }, [searchQuery]);
 };
 
 export default useInfiniteScroll;

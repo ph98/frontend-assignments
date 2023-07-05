@@ -27,8 +27,10 @@ function App() {
   };
 
   const searchMovies = (query) => {
-    navigate('/');
-    setSearchParams(createSearchParams({ search: query }));
+    navigate('/', { replace: true });
+    if (query && query !== '') {
+      setSearchParams(createSearchParams({ search: query }));
+    }
   };
 
   const getMovie = async (id) => {
