@@ -16,6 +16,7 @@ import Movies from './components/Movies';
 import Starred from './components/Starred';
 import WatchLater from './components/WatchLater';
 import YouTubePlayer from './components/YoutubePlayer';
+import CustomModal from './components/CustomModal/custom-modal';
 
 import './app.scss';
 
@@ -87,13 +88,19 @@ function App() {
         setSearchParams={setSearchParams}
       />
       <div className="container">
-        {videoKey ? (
-          <YouTubePlayer
-            videoKey={videoKey}
-          />
-        ) : (
-          <div style={{ padding: '30px' }}><h6>no trailer available. Try another movie</h6></div>
-        )}
+        {
+          videoKey
+            ? (
+              <CustomModal
+                isOpen={videoKey !== null}
+                onClose={() => setVideoKey(null)}
+              >
+                <YouTubePlayer
+                  videoKey={videoKey}
+                />
+              </CustomModal>
+            ) : null
+        }
         <Routes>
           <Route path="/" element={<Movies viewTrailer={viewTrailer} closeCard={closeCard} />} />
           <Route path="/starred" element={<Starred viewTrailer={viewTrailer} />} />
