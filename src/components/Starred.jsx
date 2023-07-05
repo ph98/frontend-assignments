@@ -5,8 +5,7 @@ import Movie from './Movie';
 import '../styles/starred.scss';
 
 function Starred({ viewTrailer }) {
-  const state = useSelector((prevState) => prevState);
-  const { starred } = state;
+  const starred = useSelector((prevState) => prevState.starred);
   const { clearAllStarred } = starredSlice.actions;
   const dispatch = useDispatch();
 

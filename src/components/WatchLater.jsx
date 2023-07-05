@@ -5,8 +5,7 @@ import Movie from './Movie';
 import '../styles/starred.scss';
 
 function WatchLater({ viewTrailer }) {
-  const state = useSelector((prevState) => prevState);
-  const { watchLater } = state;
+  const watchLater = useSelector((prevState) => prevState.watchLater);
   const { removeAllWatchLater } = watchLaterSlice.actions;
   const dispatch = useDispatch();
 

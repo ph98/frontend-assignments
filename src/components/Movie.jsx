@@ -5,8 +5,8 @@ import placeholder from '../assets/not-found-500X750.jpeg';
 
 // eslint-disable-next-line no-unused-vars
 function Movie({ movie, viewTrailer, closeCard }) {
-  const state = useSelector((prevState) => prevState);
-  const { starred, watchLater } = state;
+  const starred = useSelector((prevState) => prevState.starred);
+  const watchLater = useSelector((prevState) => prevState.watchLater);
   const { starMovie, unstarMovie } = starredSlice.actions;
   const { addToWatchLater, removeFromWatchLater } = watchLaterSlice.actions;
 
