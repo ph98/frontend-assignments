@@ -1,0 +1,77 @@
+@font-face {
+  font-family: DIN Next TR Regular;
+  src: url(./assets/fonts/DINNextLTPro-Regular.woff) format('woff'), url(./assets/fonts/DINNextLTPro-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: DIN Next TR Medium;
+  src: url(./assets/fonts/DINNextLTPro-Medium.woff) format('woff'), url(./assets/fonts/DINNextLTPro-Medium.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: DIN Next TR Bold;
+  src: url(./assets/fonts/DINNextLTPro-Bold.woff) format('woff'), url(./assets/fonts/DINNextLTPro-Bold.woff2) format('woff2');
+}
+
+:root {
+  --font-regular: DIN Next TR Regular, -apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --font-medium: DIN Next TR Medium, -apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --font-bold: DIN Next TR Bold, -apple-system, system-ui, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+
+  --color-background1: black;
+  --color-background2: rgba(248, 250, 253, 0.1);
+  --color-background3: rgba(248, 250, 253, 0.2);
+  --color-background4: rgba(248, 250, 253, 0.28);
+  --color-background5: rgba(248, 250, 253, 0.36);
+  --color-background6: rgba(248, 250, 253, 0.36);
+  --color-foreground1: rgba(248, 250, 253, 0.48);
+  --color-foreground2: rgba(248, 250, 253, 0.56);
+  --color-foreground3: white;
+  --color-foreground4: black;
+
+  --color-primary-blue1: rgba(27, 164, 255, 0.5);
+  --color-primary-blue2: rgba(27, 164, 255, 0.8);
+  --color-primary-blue3: rgba(27, 164, 255, 0.85);
+  --color-primary-blue4: rgba(27, 164, 255, 0.9);
+  --color-secondary-blue1: rgba(27, 164, 255, 0.3);
+  --color-secondary-blue2: rgba(27, 164, 255, 0.35);
+  --color-secondary-blue3: rgba(27, 164, 255, 0.4);
+
+  --color-primary-green1: rgba(19, 255, 128, 0.5);
+  --color-primary-green2: rgba(19, 255, 128, 0.8);
+  --color-primary-green3: rgba(19, 255, 128, 0.85);
+  --color-primary-green4: rgba(19, 255, 128, 0.9);
+  --color-secondary-green1: rgba(19, 255, 128, 0.3);
+  --color-secondary-green2: rgba(19, 255, 128, 0.35);
+  --color-secondary-green3: rgba(19, 255, 128, 0.4);
+
+  --color-primary-red1: rgba(255, 78, 78, 0.5);
+  --color-primary-red2: rgba(255, 78, 78, 0.8);
+  --color-primary-red3: rgba(255, 78, 78, 0.85);
+  --color-primary-red4: rgba(255, 78, 78, 0.9);
+  --color-secondary-red1: rgba(255, 78, 78, 0.3);
+  --color-secondary-red2: rgba(255, 78, 78, 0.35);
+  --color-secondary-red3: rgba(255, 78, 78, 0.4);
+
+  --color-primary-orange1: rgba(255, 177, 24, 0.5);
+  --color-primary-orange2: rgba(255, 177, 24, 0.8);
+  --color-primary-orange3: rgba(255, 177, 24, 0.85);
+  --color-primary-orange4: rgba(255, 177, 24, 0.9);
+  --color-secondary-orange1: rgba(255, 177, 24, 0.3);
+  --color-secondary-orange2: rgba(255, 177, 24, 0.35);
+  --color-secondary-orange3: rgba(255, 177, 24, 0.4);
+
+  --max-width: 1200px;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-background1);
+  color: var(--color-foreground3);
+}
