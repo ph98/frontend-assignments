@@ -1,11 +1,15 @@
 // import { useState } from 'react'
-import './App.css'
+import AddIsinForm from './components/add-isin'
+import { WatchListProvider } from './context/WatchListContext'
+import './App.scss'
 
 function App() {
 
   return (
     <div className="main-layout">
-      Hello
+      <WatchListProvider>
+        <AddIsinForm />
+      </WatchListProvider>
     </div>
   )
 }

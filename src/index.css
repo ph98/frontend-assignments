@@ -74,4 +74,8 @@ body {
   padding: 0;
   background: var(--color-background1);
   color: var(--color-foreground3);
+  font-family:  var(--font-regular)
+}
+*{
+  box-sizing: border-box;
 }
