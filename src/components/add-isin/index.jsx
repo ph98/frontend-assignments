@@ -19,7 +19,7 @@ const AddIsinForm = () => {
                 console.log(err.message);
             }
         }}>
-            <input name='isin' placeholder="ISIN number" />
+            <input name='isin' placeholder="Please enter ISIN" />
             <button type="submit" className=" button add-isin-button">Subscribe</button>
         </form>
     </div>
