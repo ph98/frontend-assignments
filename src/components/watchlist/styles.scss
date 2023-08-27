@@ -5,6 +5,10 @@
     align-items: center;
     width: 100%;
     gap: 1rem;
+    .no-item{
+        text-align: center;
+        font-family: var(--font-bold);
+    }
     .watch-list-item{
         background-color: var(--color-background3);
         padding: 1rem;

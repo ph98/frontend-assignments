@@ -24,17 +24,16 @@ const WatchListItemComponent = ({ data, onRemove }) => {
   useEffect(() => {
     const checkExpiration = () => {
       // will expire after 10 seconds:
-      const expirationTime = new Date(data.date).getTime() + (10 * ONE_SECOND);
+      const expirationTime = new Date(data.date).getTime() + 10 * ONE_SECOND;
       setIsExpired(Date.now() > expirationTime);
     };
 
     checkExpiration();
-    const interval = setInterval(checkExpiration, ONE_SECOND); 
+    const interval = setInterval(checkExpiration, ONE_SECOND);
 
     return () => {
       clearInterval(interval);
     };
-    
   }, [data]);
 
   return (
@@ -59,6 +58,15 @@ const WatchListComponent = () => {
 
   return (
     <div className="watch-list">
+      {watchList.length === 0 ? (
+        <span className="no-item">
+          ¯\_(ツ)_/¯
+          <br />
+          <br />
+          Start by adding an ISIN to your watchList. Try
+          &quot;DE000BASF111&quot;.
+        </span>
+      ) : null}
       {watchList.map((watchListItem) => (
         <WatchListItemComponent
           data={watchListItem}
