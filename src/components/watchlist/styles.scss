@@ -11,5 +11,18 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        .button.remove{
+            background-color: var(--color-primary-red1);
+            color: white;
+            &:hover{
+                background-color: var(--color-primary-red4);
+            }
+        }
+
+        .is-expired{
+            color: var(--color-primary-red4);
+            padding-left: 0.2rem;
+        }
     }
 }

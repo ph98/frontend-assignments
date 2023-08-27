@@ -10,12 +10,10 @@ const MessageComponent = ({
     message, type = 'error'
 }) => {
   return (
-    <span 
-    className='message-component'
+    <span className={`message-component ${message ?'open' : 'close'}` }
         style={{
             backgroundColor: types[type].backgroundColor,
             color: types[type].color,
-            display: message ? 'block' :'none'
         }}
     >
         {message}

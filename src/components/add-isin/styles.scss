@@ -2,16 +2,25 @@
 
 .add-isin-form{
     width: 100%;
-    max-width: 32rem;
     background-color: var(--color-background2);
-    min-height: 10rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
 
-    .add-isin-button {
-        
+
+    form{
+        display: flex;
+        width: 100%;
+        gap: 1rem;
+        input {
+            padding: 1rem;
+            flex:1;
+        }
+        button{
+            padding: 1rem;
+        }
     }
+   
 }

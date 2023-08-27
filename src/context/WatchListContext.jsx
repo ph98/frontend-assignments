@@ -18,7 +18,6 @@ export function WatchListProvider({ children }) {
 
   useEffect(() => {
     if(socket){
-      console.log('socket', socket);
       watchList.map(isin=>socket.send(JSON.stringify({"subscribe": isin})))
     }
   }, [socket])
@@ -32,10 +31,14 @@ export function WatchListProvider({ children }) {
     if(socket){
       socket.addEventListener('message',e=>{
         const formattedData = (JSON.parse(e.data))
-        const {isin} = formattedData;
+        const formattedDataWithDate = {
+          ...formattedData,
+          date: new Date()
+        }
+
         latestDataRef.current = ({
             ...latestDataRef.current,
-            [isin]: formattedData
+            [formattedDataWithDate.isin]: formattedDataWithDate
           })
       })
     }
