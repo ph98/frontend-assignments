@@ -62,11 +62,15 @@
   --color-secondary-orange3: rgba(255, 177, 24, 0.4);
 
   --max-width: 1200px;
+
+  --border-radius-base: 0.5rem;
 }
 
 html {
   margin: 0;
   padding: 0;
+  height: 100%;
+
 }
 
 body {
@@ -74,8 +78,20 @@ body {
   padding: 0;
   background: var(--color-background1);
   color: var(--color-foreground3);
-  font-family:  var(--font-regular)
+  font-family:  var(--font-regular);
+  height: 100%;
+
 }
 *{
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+#root{
+  display: flex; 
+  flex-direction: row;
+  justify-content: center;
+  height: 100%;
 }

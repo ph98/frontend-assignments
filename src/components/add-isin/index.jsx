@@ -5,12 +5,10 @@ import './styles.scss';
 
 const AddIsinForm = () => {
     const {
-        watchList,
         addToWatchList,
         errorMessage
     } = useWatchList()
 
-        console.log('watchList', watchList)
   return (
     <div className='add-isin-form'>
         <MessageComponent message={errorMessage} type='error' />

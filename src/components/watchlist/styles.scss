@@ -1,0 +1,15 @@
+.watch-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    .watch-list-item{
+        background-color: var(--color-background3);
+        padding: 1rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}
