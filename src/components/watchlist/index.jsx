@@ -40,8 +40,8 @@ const WatchListItemComponent = ({ data, onRemove }) => {
   return (
     <div className="watch-list-item">
       <span className="isin-name">{data.isin}</span>
-      <span className="price">
-        {formatNumbers(data.price)}
+      <span className="price" title={data.price}>
+        price: {formatNumbers(data.price)}
         {isExpired && (
           <span className="is-expired">
             (Last update: {formatDate(data.date)})

@@ -12,6 +12,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        @media screen and (max-width: 768px) {
+            .price{
+                order: 1;
+                width: 100%;
+            }   
+        }
+
+
         .button.remove{
             background-color: var(--color-primary-red1);
             color: white;
