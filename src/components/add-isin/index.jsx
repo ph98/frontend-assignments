@@ -20,7 +20,7 @@ const AddIsinForm = () => {
             }
         }}>
             <input name='isin' placeholder="ISIN number" />
-            <button type="submit" className="add-isin-button">Subscribe</button>
+            <button type="submit" className=" button add-isin-button">Subscribe</button>
         </form>
     </div>
   )

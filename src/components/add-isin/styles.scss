@@ -18,8 +18,15 @@
       padding: 1rem;
       flex: 1;
     }
-    button {
-      padding: 1rem;
+  }
+
+  .add-isin-button{
+    padding: 1rem;
+    background-color: var(--color-primary-blue1);
+    
+    &:hover{
+      background-color: var(--color-primary-blue2);
+      
     }
   }
 }

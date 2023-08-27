@@ -10,6 +10,7 @@ function App() {
     <div className="main-layout">
       <ToastProvider>
         <WatchListProvider>
+          <img className="logo" src='/public/tr.svg' />
           <AddIsinForm />
           <WatchList />
         </WatchListProvider>

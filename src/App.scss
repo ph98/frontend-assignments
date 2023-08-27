@@ -10,6 +10,15 @@
   max-width: var(--max-width);
   background-color: var(--color-background3);
   margin-top: 5rem;
+
+  .logo{
+    width: 100%;
+    max-width: 15rem;
+    filter: invert(1);
+  }
+  @media screen and (max-width: 576px) {
+    padding: 2rem 0.5rem;
+  }
 }
 
 .button {
@@ -18,9 +27,16 @@
   background-color: var(--color-background5);
   box-shadow: 0;
   outline: none;
+  font-family: var(--font-bold);
+  color: var(--color-foreground3);
+  border-radius: var(--border-radius-base);
 
   &:hover{
     cursor: pointer;
     background-color: var(--color-background4);
+  }
+
+  &:focus-within{
+    outline: 0.2rem solid var(--color-primary-blue1);
   }
 }
