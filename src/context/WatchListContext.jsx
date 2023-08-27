@@ -62,7 +62,7 @@ export function WatchListProvider({ children }) {
     const isinRegex = /^[A-Z]{2}[A-Z0-9]{9}[0-9]$/;
     if (!isinRegex.test(isin)) {
       setErrorMessage('Invalid ISIN format.');
-      return;
+      throw new Error('Invalid ISIN format.');
     }
 
     
@@ -71,6 +71,7 @@ export function WatchListProvider({ children }) {
       socket.send(JSON.stringify({"subscribe": isin}))
     } else{
       setErrorMessage('ISIN already in watch list.');
+      throw new Error('ISIN already in watch list.');
     }
   };
 

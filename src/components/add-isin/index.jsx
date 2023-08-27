@@ -16,12 +16,13 @@ const AddIsinForm = () => {
             e.preventDefault()
             try{
                 addToWatchList(e.target.isin.value)
+                e.target.reset();
             }catch(err){
                 console.log(err.message);
             }
         }}>
             <input name='isin' placeholder="ISIN number" />
-            <button type="submit" className="add-isin-button">Add</button>
+            <button type="submit" className="add-isin-button">Subscribe</button>
         </form>
     </div>
   )

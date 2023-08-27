@@ -4,6 +4,8 @@ import { formatNumbers } from "../../utilities/formats";
 
 import "./styles.scss";
 
+const ONE_SECOND = 1000;
+
 // better to use dayjs or moment or ...
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en-US", {
@@ -22,17 +24,18 @@ const WatchListItemComponent = ({ data, onRemove }) => {
   useEffect(() => {
     const checkExpiration = () => {
       // will expire after 10 seconds:
-      const expirationTime = new Date(data.date).getTime() + 1000 * 10;
+      const expirationTime = new Date(data.date).getTime() + (10 * ONE_SECOND);
       setIsExpired(Date.now() > expirationTime);
     };
 
     checkExpiration();
-    const interval = setInterval(checkExpiration, 1000); 
+    const interval = setInterval(checkExpiration, ONE_SECOND); 
 
     return () => {
       clearInterval(interval);
     };
-  }, [data.date]);
+    
+  }, [data]);
 
   return (
     <div className="watch-list-item">
@@ -46,7 +49,7 @@ const WatchListItemComponent = ({ data, onRemove }) => {
         )}
       </span>
       <button className="button remove" onClick={() => onRemove(data.isin)}>
-        remove
+        Unsubscribe
       </button>
     </div>
   );
