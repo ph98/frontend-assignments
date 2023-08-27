@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './styles.scss';
 
 const types = {
@@ -9,8 +10,13 @@ const types = {
 const MessageComponent = ({
     message, type = 'error'
 }) => {
+    const [activeAnimation, setActiveAnimation] = useState(false)
+    useEffect(() => {
+        setActiveAnimation(true)
+    }, [])
+    
   return (
-    <span className={`message-component ${message ?'open' : 'close'}` }
+    <span className={`message-component ${activeAnimation ?'open' : 'close'}` }
         style={{
             backgroundColor: types[type].backgroundColor,
             color: types[type].color,

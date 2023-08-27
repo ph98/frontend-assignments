@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import useWebSocket from '../hooks/useWebsocket';
+import {  useToastContext } from './ToastContext';
 
 const WatchListContext = createContext();
 
@@ -7,15 +8,18 @@ export function useWatchList() {
   return useContext(WatchListContext);
 }
 
+const initialWatchList = JSON.parse(localStorage.getItem('watchList')) || [];
+
+console.log('initialWatchList',initialWatchList)
 export function WatchListProvider({ children }) {
-  const [watchList, setWatchList] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [watchList, setWatchList] = useState(initialWatchList);
   const [data, setData] = useState({});
   const latestDataRef = useRef({});
 
   const watchListWithData = watchList.map(isin => data[isin] || {isin});
   const {socket} = useWebSocket('ws://localhost:8425/')
 
+  const {addToast} = useToastContext();
   useEffect(() => {
     if(socket){
       watchList.map(isin=>socket.send(JSON.stringify({"subscribe": isin})))
@@ -23,8 +27,7 @@ export function WatchListProvider({ children }) {
   }, [socket])
   
   useEffect(() =>{ 
-    console.log('first', watchList)
-
+    localStorage.setItem('watchList', JSON.stringify(watchList))
   }, [watchList])
 
   useEffect(()=>{
@@ -57,11 +60,9 @@ export function WatchListProvider({ children }) {
 
 
   const addToWatchList = (isin) => {
-    setErrorMessage(null);
-
     const isinRegex = /^[A-Z]{2}[A-Z0-9]{9}[0-9]$/;
     if (!isinRegex.test(isin)) {
-      setErrorMessage('Invalid ISIN format.');
+      addToast('Invalid ISIN format.');
       throw new Error('Invalid ISIN format.');
     }
 
@@ -70,7 +71,7 @@ export function WatchListProvider({ children }) {
       setWatchList((prevList) => [...prevList, isin]);
       socket.send(JSON.stringify({"subscribe": isin}))
     } else{
-      setErrorMessage('ISIN already in watch list.');
+      addToast('ISIN already in watch list.');
       throw new Error('ISIN already in watch list.');
     }
   };
@@ -86,7 +87,6 @@ export function WatchListProvider({ children }) {
   const contextValue = {
     watchList: watchListWithData,
     addToWatchList,
-    errorMessage,
     removeFromWatchList
   };
 

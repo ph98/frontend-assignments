@@ -1,17 +1,15 @@
 import { useWatchList } from "../../context/WatchListContext"
-import MessageComponent from "../message";
+
 
 import './styles.scss';
 
 const AddIsinForm = () => {
     const {
         addToWatchList,
-        errorMessage
     } = useWatchList()
 
   return (
     <div className='add-isin-form'>
-        <MessageComponent message={errorMessage} type='error' />
         <form onSubmit={e=>{
             e.preventDefault()
             try{
