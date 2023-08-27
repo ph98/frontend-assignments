@@ -16,7 +16,7 @@ const AddIsinForm = () => {
                 addToWatchList(e.target.isin.value)
                 e.target.reset();
             }catch(err){
-                console.log(err.message);
+                console.error(err.message);
             }
         }}>
             <input name='isin' placeholder="Please enter ISIN" />

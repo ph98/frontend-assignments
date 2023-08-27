@@ -12,7 +12,7 @@ const useToast = () => {
       message,
     };
 
-    setToasts((prevToasts) => [...prevToasts, newToast]);
+    setToasts((prevToasts) => [...prevToasts, newToast].slice(-5));
   };
 
   const removeToast = (id) => {

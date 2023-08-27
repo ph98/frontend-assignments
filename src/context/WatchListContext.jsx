@@ -10,7 +10,6 @@ export function useWatchList() {
 
 const initialWatchList = JSON.parse(localStorage.getItem('watchList')) || [];
 
-console.log('initialWatchList',initialWatchList)
 export function WatchListProvider({ children }) {
   const [watchList, setWatchList] = useState(initialWatchList);
   const [data, setData] = useState({});
