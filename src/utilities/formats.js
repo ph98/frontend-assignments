@@ -1,5 +1,1 @@
-export const formatNumbers = (num) => {
-
-
-    return Number.isNaN(Number(num)) ? '-' : Number(num).toFixed(3)
-}
+export const formatNumbers = (num) => Number.isNaN(Number(num)) ? '-' : Number(num).toFixed(3);
