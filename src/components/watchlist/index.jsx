@@ -18,7 +18,7 @@ const formatDate = (date) =>
     hour12: false,
   }).format(date);
 
-const WatchListItemComponent = ({ data, onRemove }) => {
+export const WatchListItemComponent = ({ data, onRemove }) => {
   const [isExpired, setIsExpired] = useState(false);
 
   useEffect(() => {

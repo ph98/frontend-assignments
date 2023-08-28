@@ -17,6 +17,7 @@ const MessageComponent = ({
     
   return (
     <span className={`message-component ${activeAnimation ?'open' : 'close'}` }
+        role='alert'
         style={{
             backgroundColor: types[type].backgroundColor,
             color: types[type].color,
