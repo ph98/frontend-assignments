@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import useWebSocket from '../hooks/useWebsocket';
-import {  useToastContext } from './ToastContext';
+import { useToastContext } from './ToastContext';
 
 const WatchListContext = createContext();
 

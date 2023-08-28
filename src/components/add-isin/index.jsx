@@ -1,29 +1,28 @@
-import { useWatchList } from "../../context/WatchListContext"
-
-
-import './styles.scss';
+import { useRef } from "react";
+import { useWatchList } from "../../context/WatchListContext";
+import "./styles.scss";
 
 const AddIsinForm = () => {
-    const {
-        addToWatchList,
-    } = useWatchList()
+  const { addToWatchList } = useWatchList();
+  const isinValue = useRef()
 
   return (
-    <div className='add-isin-form'>
-        <form onSubmit={e=>{
-            e.preventDefault()
-            try{
-                addToWatchList(e.target.isin.value)
-                e.target.reset();
-            }catch(err){
-                console.error(err.message);
-            }
-        }}>
-            <input name='isin' placeholder="Please enter ISIN" />
-            <button type="submit" className=" button add-isin-button">Subscribe</button>
-        </form>
+    <div className="add-isin-form">
+      <form
+        role="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          addToWatchList(isinValue.current);
+          e.target.reset();
+        }}
+      >
+        <input name="isin" placeholder="Please enter ISIN" onChange={(e) => isinValue.current = e.target.value}/>
+        <button type="submit" className="button add-isin-button">
+          Subscribe
+        </button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default AddIsinForm
+export default AddIsinForm;
