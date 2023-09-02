@@ -1,0 +1,15 @@
+
+.mage-page{
+    display: flex;
+    flex-direction: column;
+
+    .table-container{
+        padding: 0.5rem 2rem
+    }
+    .search-container{
+        padding: 0.5rem 2rem;
+    }
+    .button-container{
+        padding: 0.5rem 2rem;
+    }
+}
